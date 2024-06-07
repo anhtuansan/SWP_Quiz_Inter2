@@ -36,15 +36,8 @@
                 /*padding-top: -5%;*/
                 padding-top: -110px;
             }
-/*             section{
-                margin-bottom:  -25%;
-            }
-            */
-/*              section{
-                margin-bottom: 100px;  
-            }*/
 
-            
+         
            
         </style>
     </head>
@@ -146,5 +139,8 @@
         <br/>
 
         <%@include file="/layout/footer.jsp" %>
+        
+        <!-- side bar có thể thu nhỏ khi màn hình nhỏ  -->
+        <script src="js/script.js"></script>
     </body>
 </html>
