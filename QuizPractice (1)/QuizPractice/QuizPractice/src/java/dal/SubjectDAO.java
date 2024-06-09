@@ -349,6 +349,5 @@ public class SubjectDAO extends DBContext {
         for (Subject s : c.allSubjectsWithConditions("", "asc")) {
             System.out.println(s.toString());
         }
-
     }
 }

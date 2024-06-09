@@ -21,7 +21,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
-    
+
     <body>
         <%@include file="/layout/header.jsp"%>
         <%@include file="/layout/sidebar.jsp"%>
@@ -60,7 +60,7 @@
                         <h4>Origin price: <span style="text-decoration: line-through">${subject.pricePackages.get(0).price} VND</span></h4>
                         <c:forEach var="i" items="${subject.tags}">
                             <span class="card-text"><span class="badge badge-info">${i.tag}</span></span>
-                        </c:forEach>
+                            </c:forEach>
                         <br/>
                         <a href="<%=contextPath%>/teacher?id=${subject.creator.userId}" class="inline-btn">view profile</a>
                         <a href="#" id="registerNowBtn" class="inline-btn">Register Now</a>
@@ -98,8 +98,12 @@
                 // Load the register subject popup content
                 $("#registerNowBtn").on("click", function (event) {
                     event.preventDefault();
+                    var subjectId = '${subject.id}'; // Pass the subject ID to the modal
+                    var subjectName = '${subject.name}'; 
                     $.ajax({
-                        url: "<%=contextPath%>/layout/subjectRegisterPopUp.jsp",
+                        url: "<%=contextPath%>/subjectRegister",
+                        type: "GET",
+                        data: {subjectId: subjectId, subjectName: subjectName},
                         success: function (data) {
                             $("#registerSubjectPopup .modal-content").html(data);
                             $("#registerSubjectPopup").modal("show");
