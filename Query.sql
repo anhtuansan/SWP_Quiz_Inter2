@@ -18,3 +18,10 @@ insert into Subject_Register
 values(2,27,1,null,null,null,'pending');
 
 
+select * from users;
+insert into users(full_name, email, phone_number, password,gender,created_at,role_id,status_id) 
+values('yentyen', 'yen@gmail.com','12312','123',1,'2024-06-06',1,2);
+
+
+SELECT SCOPE_IDENTITY() AS LastInsertedId;
+SELECT @@IDENTITY AS LastInsertedId;
