@@ -147,7 +147,7 @@
                             <li><a href="<%=request.getContextPath()%>/home">Home</a></li>
                             <li><a href="<%=request.getContextPath()%>/blog">Blog</a></li>
                             <li><a href="<%=request.getContextPath()%>/courses">Courses</a></li>
-                            <li><a href="<%=request.getContextPath()%>/myregister">My Register</a></li>
+                            <li><a href="<%=request.getContextPath()%>/myRegister">My Register</a></li>
                             <li><a href="<%=request.getContextPath()%>/myregister">Register Course</a></li>
                             <li><a href="<%=request.getContextPath()%>/myregister">Simulate Exam</a></li> 
                             <li><a href="<%=request.getContextPath()%>/myregister">Practice List</a></li>

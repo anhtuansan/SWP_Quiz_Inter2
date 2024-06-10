@@ -7,7 +7,7 @@
         <i class="fas fa-times"></i>
     </div>
 
-    
+
     <c:if test="${sessionScope.user != null}">
         <div class="profile">
             <img src="<%=contextPath%>/${sessionScope.user.profileImg}" class="image" alt="">
@@ -18,13 +18,13 @@
     </c:if>
     <br/>
 
-    <form action="<%=request.getContextPath()%>/subject" method="post" class="search-form">
-        <input type="text" name="search_box" required placeholder="Subject" maxlength="100">
+    <form action="<%=request.getContextPath()%>/myRegister" method="post" class="search-form">
+        <input type="text" name="subjectName" required placeholder="Subject" maxlength="100">
         <button type="submit" class="fas fa-search"></button>
     </form>
     <br/>
 
-   <form action="search" method="GET" class="form-inline" id="searchByCategory">
+    <form action="search" method="GET" class="form-inline" id="searchByCategory">
         <div class="form-group">
             <select id="category" name="category" class="form-control">
                 <option value="" disabled selected>Tìm kiếm theo category</option>
@@ -36,8 +36,8 @@
 
     </form>
     <br/>
-    
-     <form action="<%=request.getContextPath()%>/subject" method="post" class="search-form">
+
+    <form action="<%=request.getContextPath()%>/subject" method="post" class="search-form">
         <input type="text" name="search_box" required placeholder="Static content" maxlength="100">
         <button type="submit" class="fas fa-search"></button>
     </form>

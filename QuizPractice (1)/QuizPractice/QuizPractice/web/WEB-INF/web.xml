@@ -4,9 +4,25 @@
         <servlet-name>SubjectRegisterController</servlet-name>
         <servlet-class>controller.SubjectRegisterController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MyRegisterServlet</servlet-name>
+        <servlet-class>controller.MyRegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRegisterSubjectServlet</servlet-name>
+        <servlet-class>controller.DeleteRegisterSubjectServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubjectRegisterController</servlet-name>
         <url-pattern>/subjectRegister</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyRegisterServlet</servlet-name>
+        <url-pattern>/myRegister</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRegisterSubjectServlet</servlet-name>
+        <url-pattern>/deleteRegister</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

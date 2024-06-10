@@ -153,3 +153,11 @@ ADD Type NVARCHAR(255);
 ALTER TABLE questions
 ADD Status INT,
     Media NVARCHAR(MAX);
+
+
+----------------thêm
+ALTER TABLE Subjects
+ADD  dimensionId INT;
+
+ALTER TABLE Subjects
+ADD CONSTRAINT FK_Subjects_Dimension FOREIGN KEY (dimensionId) REFERENCES Dimension(DimensionID);
