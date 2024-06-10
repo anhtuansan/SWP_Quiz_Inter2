@@ -150,7 +150,7 @@
                             <li><a href="<%=request.getContextPath()%>/myRegister">My Register</a></li>
                             <li><a href="<%=request.getContextPath()%>/myregister">Register Course</a></li>
                             <li><a href="<%=request.getContextPath()%>/myregister">Simulate Exam</a></li> 
-                            <li><a href="<%=request.getContextPath()%>/myregister">Practice List</a></li>
+                            <li><a href="<%=request.getContextPath()%>/practiceList">Practice List</a></li>
                             </c:when>
                             
                             <c:when test="${sessionScope.user.roleId == 2}">

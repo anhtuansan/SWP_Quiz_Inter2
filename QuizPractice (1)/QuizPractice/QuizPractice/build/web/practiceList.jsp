@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        
+
         <!-- Custom CSS to make the footer fixed -->
         <style>
             body {
@@ -44,25 +44,37 @@
                 margin-top: -25px;
             }
         </style>
+        
+        
+        <!-- JavaScript to submit form on combobox change -->
+        <script>
+            $(document).ready(function() {
+                $('#subjectSelect').change(function() {
+                    $('#subjectForm').submit();
+                });
+            });
+        </script>
+
+
     </head>
 
     <body>
         <%@include file="/layout/header.jsp"%>
-        
+
         <section class="practiceList">
             <h1 class="heading text-center">Practice List</h1>
-            
+
             <div id="topTable" class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <select class="form-control">
-                            <option selected disabled>Choose Subject</option>
-                            <option value="math">Math</option>
-                            <option value="science">Science</option>
-                            <option value="history">History</option>
-                            <option value="geography">Geography</option>
-                            <option value="physics">Physics</option>
-                        </select>
+                        <form id="subjectForm" method="post" action="practiceList">
+                            <select id="subjectSelect" name="subject" class="form-control">
+                                <option selected disabled>Choose Subject</option>
+                                <c:forEach var="subject" items="${subjects}">
+                                    <option value="${subject.toLowerCase()}">${subject}</option>
+                                </c:forEach>
+                            </select>
+                        </form>
                     </div>
                     <div class="col-md-5"></div>
                     <div class="col-md-2">
@@ -73,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="container">
                 <table class="table table-bordered table-hover">
                     <thead>
@@ -87,92 +99,53 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Math</td>
-                            <td>2023-01-15</td>
-                            <td>50</td>
-                            <td>90%</td>
-                            <td>01:30:00</td>
-                            <td><a href="#">View Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>Science</td>
-                            <td>2023-02-20</td>
-                            <td>60</td>
-                            <td>83%</td>
-                            <td>02:00:00</td>
-                            <td><a href="#">View Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>History</td>
-                            <td>2023-03-05</td>
-                            <td>40</td>
-                            <td>88%</td>
-                            <td>01:20:00</td>
-                            <td><a href="#">View Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>Geography</td>
-                            <td>2023-04-10</td>
-                            <td>30</td>
-                            <td>93%</td>
-                            <td>01:00:00</td>
-                            <td><a href="#">View Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>Physics</td>
-                            <td>2023-05-15</td>
-                            <td>70</td>
-                            <td>93%</td>
-                            <td>02:30:00</td>
-                            <td><a href="#">View Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>Geography</td>
-                            <td>2023-04-10</td>
-                            <td>30</td>
-                            <td>93%</td>
-                            <td>01:00:00</td>
-                            <td><a href="#">View Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>Physics</td>
-                            <td>2023-05-15</td>
-                            <td>70</td>
-                            <td>93%</td>
-                            <td>02:30:00</td>
-                            <td><a href="#">View Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>Geography</td>
-                            <td>2023-04-10</td>
-                            <td>30</td>
-                            <td>93%</td>
-                            <td>01:00:00</td>
-                            <td><a href="#">View Detail</a></td>
-                        </tr>
-                       
+                        <!-- Assume that 'practices' is a list of practice objects passed from the back-end -->
+                        <c:forEach var="practice" items="${practices}">
+                            <tr>
+                                <td>${practice.subjectName}</td>
+                                <td>${practice.dateTaken}</td>
+                                <td>${practice.numberQuestion}</td>
+                                <td>${practice.numberCorrect/practice.numberQuestion*100}%</td>
+                                <td>${practice.duration}:00</td>
+                                <td><a href="#">View Detail</a></td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
-                
+
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                        <c:choose>
+                            <c:when test="${currentPage > 1}">
+                                <li>
+                                    <a href="practiceList?page=${currentPage - 1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            </c:when>
+                        </c:choose>
+
+                        <c:forEach var="i" begin="1" end="${totalPages}">
+                            <c:choose>
+                                <c:when test="${i == currentPage}">
+                                    <li class="active"><a href="#">${i}</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <li><a href="practiceList?page=${i}">${i}</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+
+                        <c:choose>
+                            <c:when test="${currentPage < totalPages}">
+                                <li>
+                                    <a href="practiceList?page=${currentPage + 1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </c:when>
+                        </c:choose>
                     </ul>
                 </nav>
             </div>
@@ -180,7 +153,7 @@
         <br/>
 
         <%@include file="/layout/footer.jsp" %>
-        
+
         <!-- side bar có thể thu nhỏ khi màn hình nhỏ  -->
         <script src="js/script.js"></script>
     </body>

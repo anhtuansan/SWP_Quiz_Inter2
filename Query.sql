@@ -79,9 +79,14 @@ WITH PagedResults AS (
     LEFT JOIN subjects s ON r.SubjectId = s.id 
 
     LEFT JOIN package_price p ON p.id = r.PackageId
-    WHERE r.UserId = 27 and s.name like '%RO%'
+    WHERE r.UserId = 27 and s.name like '%E%'
 )
 SELECT * 
 FROM PagedResults
-WHERE row_num BETWEEN 5 AND 10
+WHERE row_num BETWEEN 1 AND 5
 ORDER BY row_num;
+
+
+
+
+-----------------------------14 practice list
