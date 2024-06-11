@@ -143,7 +143,6 @@
                     <c:choose>
                     
                         <c:when test="${sessionScope.user.roleId == 1}">
-                      
                             <li><a href="<%=request.getContextPath()%>/home">Home</a></li>
                             <li><a href="<%=request.getContextPath()%>/blog">Blog</a></li>
                             <li><a href="<%=request.getContextPath()%>/courses">Courses</a></li>

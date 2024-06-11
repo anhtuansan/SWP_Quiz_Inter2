@@ -90,3 +90,73 @@ ORDER BY row_num;
 
 
 -----------------------------14 practice list
+select * from Practices;
+select * from subjects;
+
+insert into Practices values(27, 2, 'All',20,GETDATE(),10,30);
+insert into Practices values(27, 6, 'All',20,GETDATE(),10,20);
+insert into Practices values(27, 6, 'All',20,GETDATE(),10,20);
+insert into Practices values(27, 6, 'All',20,GETDATE(),10,20);
+insert into Practices values(27, 6, 'All',20,GETDATE(),10,20);
+insert into Practices values(27, 6, 'All',20,GETDATE(),10,20);
+
+WITH PagedResults AS (
+    SELECT p.id,s.name AS subject_name, p.CreatedAt, p.NumberQuestion, p.NumberCorrect, p.Duration,
+           ROW_NUMBER() OVER (ORDER BY p.CreatedAt) AS row_num
+    FROM Practices p
+    LEFT JOIN subjects s ON p.SubjectId = s.id 
+    WHERE p.UserId = 27
+)
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;	
+
+
+
+---------------------------15 new practice Type=IT/Economic .Dimenstion: fontEnd, backEnd,hosting
+insert into Dimension values('FontEnd','IT','Include html, css, js, ...');
+insert into Dimension values('BackEnd','IT','Include java ,c++, c#, ...');
+insert into Dimension values('Hosting','IT','Include networking, tracking ...');
+insert into Dimension values('Finance','Economy','Include accounting, analysis, ...');
+select * from Dimension;
+select * from subjects;
+select * from lessons;
+
+update subjects set dimensionId = 2;
+----type content/quiz
+insert into lessons values('Lam quen voi OOP java',null, null,null,1,
+'<div class="course">
+    <h3>Introduction to Programming</h3>
+    <p>Instructor: John Doe</p>
+    <p>Duration: 10 weeks</p>
+    <p>Description: This course provides an introduction to programming concepts using Python.</p>
+</div>',
+null,
+1,'content');
+insert into lessons values('Lam quen voi OOP java part 2',null, null,null,1,
+'<div class="course">
+    <h3>Introduction to Programming</h3>
+    <p>Instructor: John Doe</p>
+    <p>Duration: 10 weeks</p>
+    <p>Description: This course provides an introduction to programming concepts using Python.</p>
+</div>',
+null,
+2,'content');
+
+insert into subject_has_lesson values(2,1);
+insert into subject_has_lesson values(2,2);
+select * from subject_has_lesson;
+
+select DimensionName from Dimension;
+
+Select name from subjects where dimensionId = 
+(select DimensionId from Dimension where DimensionName = 'BackEnd')
+
+select name from lessons 
+
+select l.name from subject_has_lesson sl 
+left join lessons l on sl.lesson_id = l.id
+where sl.subject_id =
+(select id from subjects where name = 'PRO192')
+

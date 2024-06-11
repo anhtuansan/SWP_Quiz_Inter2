@@ -53,8 +53,8 @@ public class PracticeDAO extends DBContext {
         }
         return instance;
     }
-    
-    public int getTotalRecordsSearch(int userId,String searchName) {
+
+    public int getTotalRecordsSearch(int userId, String searchName) {
         String query = "SELECT COUNT(*) FROM Practices WHERE UserId = ? AND SubjectId = (select id from subjects where name =?)";
         try {
             ps = connection.prepareStatement(query);
@@ -73,6 +73,7 @@ public class PracticeDAO extends DBContext {
         }
         return 0;
     }
+
     public List<PracticeListDTO> getPaginationPracticeListSearch(int userId, int page, int recordsPerPage, String searchName) {
         List<PracticeListDTO> lst = new ArrayList<>();
         int start = (page - 1) * recordsPerPage + 1;
@@ -114,6 +115,24 @@ public class PracticeDAO extends DBContext {
         return lst;
     }
 
+    public List<String> getListDimensionName() {
+        List<String> lst = new ArrayList<>();
+
+        try {
+            String query = "select DimensionName from Dimension";
+
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString(1);
+                lst.add(name);
+            }
+        } catch (SQLException ex) {
+        }
+        return lst;
+    }
+
     public List<String> getListSubjectName() {
         List<String> lst = new ArrayList<>();
 
@@ -121,6 +140,48 @@ public class PracticeDAO extends DBContext {
             String query = "Select name from subjects";
 
             ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString(1);
+                lst.add(name);
+            }
+        } catch (SQLException ex) {
+        }
+        return lst;
+    }
+
+    public List<String> getSubjectByDimension(String dimension) {
+        List<String> lst = new ArrayList<>();
+
+        try {
+            String query = "Select name from subjects where dimensionId = \n"
+                    + "(select DimensionId from Dimension where DimensionName = ?)";
+
+            ps = connection.prepareStatement(query);
+            ps.setString(1, dimension);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString(1);
+                lst.add(name);
+            }
+        } catch (SQLException ex) {
+        }
+        return lst;
+    }
+
+    public List<String> getLessonBySubject(String subject) {
+        List<String> lst = new ArrayList<>();
+
+        try {
+            String query = "select l.name from subject_has_lesson sl \n"
+                    + "left join lessons l on sl.lesson_id = l.id\n"
+                    + "where sl.subject_id =\n"
+                    + "(select id from subjects where name = ?)";
+
+            ps = connection.prepareStatement(query);
+            ps.setString(1, subject);
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -196,6 +257,7 @@ public class PracticeDAO extends DBContext {
         System.out.println(p.getPaginationPracticeList(27, 1, 5));
         System.out.println(p.getTotalRecords(27));
         System.out.println(p.getListSubjectName());
+        System.out.println(p.getListDimensionName());
     }
 
 }

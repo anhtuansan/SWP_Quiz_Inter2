@@ -94,6 +94,14 @@ CREATE TABLE Subject_Has_Quiz (
     FOREIGN KEY (QuizId) REFERENCES Quizs(Id)        -- Tham chiếu khóa ngoại đến bảng Quizs
 );
 
+
+Create table Lesson_Has_Quiz(
+	 Id INT PRIMARY KEY IDENTITY(1,1),  
+	 LessonId INT NOT NULL,                         -- Khóa ngoại SubjectId
+		QuizId INT NOT NULL,                            -- Khóa ngoại QuizId
+		FOREIGN KEY (LessonId) REFERENCES lessons(id), -- Tham chiếu khóa ngoại đến bảng Subjects
+		FOREIGN KEY (QuizId) REFERENCES Quizs(Id)        -- Tham chiếu khóa ngoại đến bảng Quizs
+);
 ----------------------16
 CREATE TABLE User_Quiz (
     Id INT PRIMARY KEY IDENTITY(1,1),           -- Khóa chính tự tăng

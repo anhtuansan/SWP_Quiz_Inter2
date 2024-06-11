@@ -16,6 +16,18 @@
         <servlet-name>PracticeListController</servlet-name>
         <servlet-class>controller.PracticeListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewPracticeController</servlet-name>
+        <servlet-class>controller.NewPracticeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectServlet</servlet-name>
+        <servlet-class>controller.SubjectServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LessonServlet</servlet-name>
+        <servlet-class>controller.LessonServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubjectRegisterController</servlet-name>
         <url-pattern>/subjectRegister</url-pattern>
@@ -31,6 +43,18 @@
     <servlet-mapping>
         <servlet-name>PracticeListController</servlet-name>
         <url-pattern>/practiceList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewPracticeController</servlet-name>
+        <url-pattern>/newPractice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectServlet</servlet-name>
+        <url-pattern>/subjectServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonServlet</servlet-name>
+        <url-pattern>/lessonServlet</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
