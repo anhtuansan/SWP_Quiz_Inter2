@@ -160,3 +160,13 @@ left join lessons l on sl.lesson_id = l.id
 where sl.subject_id =
 (select id from subjects where name = 'PRO192')
 
+
+
+------------------------------------20
+select * from blogs;
+select * from categories;
+update blogs set CategoryId = 8 
+
+select b.id, b.title, c.name, b.content, b.status, b.thumbnail 
+from blogs b left join categories c on b.CategoryId = c.id 
+where b.id = 18

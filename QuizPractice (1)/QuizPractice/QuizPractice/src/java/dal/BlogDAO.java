@@ -5,6 +5,7 @@
 package dal;
 
 import context.DBContext;
+import dto.BlogManagerDetailDTO;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class BlogDAO extends DBContext {
 
     private BlogDAO() {
     }
+
     /**
      * Provides a global point of access to the UserDAO instance. Implements
      * double-checked locking to ensure thread safety.
@@ -40,6 +42,57 @@ public class BlogDAO extends DBContext {
             }
         }
         return instance;
+    }
+
+    public boolean updateBlog(BlogManagerDetailDTO blog) {
+        boolean updated = false;
+        String query = "UPDATE blogs SET title = ?, CategoryId = (SELECT id FROM categories WHERE name = ?), content = ?, status = ?, briefinfo = ?, thumbnail=? WHERE id = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, blog.getTitle());
+            ps.setString(2, blog.getCategoryName());
+            ps.setString(3, blog.getContent());
+            ps.setBoolean(4, blog.isStatus());
+
+            ps.setString(5, blog.getBriefinfo());
+            ps.setString(6,blog.getThumbnail());
+            ps.setInt(7, blog.getId());
+            
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                updated = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return updated;
+    }
+
+    public BlogManagerDetailDTO getBlogDetailDTOById(int id) {
+        BlogManagerDetailDTO blogs = new BlogManagerDetailDTO();
+        String query = "select b.id, b.title, c.name, b.content, b.status, b.thumbnail, b.briefinfo \n"
+                + "from blogs b left join categories c on b.CategoryId = c.id \n"
+                + "where b.id = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                blogs.setId(rs.getInt(1));
+                blogs.setTitle(rs.getString(2));
+
+                blogs.setContent(rs.getString(4));
+                blogs.setThumbnail(rs.getString(6));
+                blogs.setBriefinfo(rs.getString(7));
+                blogs.setCategoryName(rs.getString(3));
+                blogs.setStatus(rs.getBoolean(5));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return blogs;
     }
 
     public List<Blog> searchPagingBlogs(String title, int index) {
@@ -86,7 +139,7 @@ public class BlogDAO extends DBContext {
      * @param title Tiêu đề cần đếm.
      * @return Số lượng bài viết blog có tiêu đề chứa từ khóa tìm kiếm.
      */
-    public int countBlogsByTitle(String title) {        
+    public int countBlogsByTitle(String title) {
         try {
             String query = "SELECT COUNT(*) FROM blogs WHERE title LIKE ?";
             ps = connection.prepareStatement(query);
@@ -306,7 +359,7 @@ public class BlogDAO extends DBContext {
         }
         return blogs;
     }
-    
+
     public List<Blog> listTop8Blog() {
         List<Blog> listBlogs = new ArrayList<>();
         try {
@@ -321,12 +374,12 @@ public class BlogDAO extends DBContext {
                 Date created_at = rs.getDate(4);
                 Date updated_at = rs.getDate(5);
                 String content = rs.getString(6);
-                
+
                 int status = rs.getInt(7);
                 String thumbnail = rs.getString(8);
                 String briefinfo = rs.getString(9);
-                
-                Blog  blog = new Blog();
+
+                Blog blog = new Blog();
                 blog.setBlog_id(id);
                 blog.setTitle(title);
                 blog.setAuthor_id(author_id);
@@ -336,7 +389,7 @@ public class BlogDAO extends DBContext {
                 blog.setStatus(true);
                 blog.setThumbnail(thumbnail);
                 blog.setBrieinfo(briefinfo);
-                
+
                 listBlogs.add(blog);
             }
         } catch (SQLException ex) {
@@ -347,7 +400,8 @@ public class BlogDAO extends DBContext {
 
     public static void main(String[] args) {
         BlogDAO b = getInstance();
-        System.out.println(b.getBlogById("24"));
+        System.out.println(b.getBlogDetailDTOById(18));
+
     }
 
 }

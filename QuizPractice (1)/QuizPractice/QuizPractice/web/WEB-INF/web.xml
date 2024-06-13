@@ -28,6 +28,18 @@
         <servlet-name>LessonServlet</servlet-name>
         <servlet-class>controller.LessonServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogManagerController</servlet-name>
+        <servlet-class>controller.BlogManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDetailManagerController</servlet-name>
+        <servlet-class>controller.BlogDetailManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FileUploadServlet</servlet-name>
+        <servlet-class>controller.FileUploadServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubjectRegisterController</servlet-name>
         <url-pattern>/subjectRegister</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>LessonServlet</servlet-name>
         <url-pattern>/lessonServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogManagerController</servlet-name>
+        <url-pattern>/blogManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetailManagerController</servlet-name>
+        <url-pattern>/blogDetailManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FileUploadServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

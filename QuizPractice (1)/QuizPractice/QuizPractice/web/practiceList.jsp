@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-md-5"></div>
                     <div class="col-md-2">
-                        <button class="btn btn-primary">New Practice</button>
+                       <a href="/QuizPractice/newPractice" class="btn btn-primary">New Practice</a>
                     </div>
                     <div class="col-md-2">
                         <button class="btn btn-primary">Simulation Exam</button>
