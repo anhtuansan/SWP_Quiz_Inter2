@@ -8,6 +8,7 @@ import context.DBContext;
 import dto.DimensionDTO;
 import dto.MyRegisterDTO;
 import dto.SubjectManagerDTO;
+import dto.SubjectPackagePriceDTO;
 import java.beans.Statement;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -16,8 +17,10 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import model.Dimension;
 import model.PricePackage2;
 import model.Subject;
+import model.Subject2;
 
 /**
  *
@@ -45,28 +48,256 @@ public class Subject2DAO extends DBContext {
         }
         return instance;
     }
-
-  
-  public boolean insert(String name, String img, int dimensionId, int creator_id, int status,String description) {
+    
+     public boolean addSubjectPricePackage(int packageId, int subjectId) {
         boolean updated = false;
-        String query = "insert into subjects values(?,?,GETDATE(),null,1,?,?,?)";
+        String query = "insert into subject_has_price_package values(?,?)";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1,name);
-            ps.setInt(2, creator_id);
-            ps.setString(3,img);
-            ps.setString(4,description);
-            ps.setInt(5, status);        
+            ps.setInt(1, subjectId);
+            ps.setInt(2, packageId);
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
                 updated = true;
             }
         } catch (SQLException ex) {
-            
+            ex.printStackTrace(); // Handle exception properly in a production environment
         }
         return updated;
     }
+     
+      public boolean deleteSubjectPricePackage(int packageId, int subjectId) {
+        boolean updated = false;
+        String query = "delete from subject_has_price_package where subject_id=? and price_package_id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, subjectId);
+            ps.setInt(2, packageId);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                updated = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Handle exception properly in a production environment
+        }
+        return updated;
+    }
+    
+    
+
+    public List<SubjectPackagePriceDTO> getListSubjectPackagePriceDTO(int subjectId) {
+        List<SubjectPackagePriceDTO> lst = new ArrayList<>();
+
+        try {
+            String query = "SELECT \n"
+                    + "    pp.*,\n"
+                    + "    CASE \n"
+                    + "        WHEN EXISTS (\n"
+                    + "            SELECT 1 \n"
+                    + "            FROM subject_has_price_package shpp \n"
+                    + "            WHERE shpp.price_package_id = pp.id \n"
+                    + "              AND shpp.subject_id = ?\n"
+                    + "        ) THEN 'active'\n"
+                    + "        ELSE 'inactive'\n"
+                    + "    END AS status\n"
+                    + "FROM \n"
+                    + "package_price pp";
+
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, subjectId);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {                
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                int duration  = rs.getInt(3);
+                double salePrice = rs.getDouble(4);
+                double price = rs.getDouble(5);
+                String status = rs.getString(7);
+                
+
+                SubjectPackagePriceDTO s = new SubjectPackagePriceDTO(id, name, duration, price, salePrice, status);
+                lst.add(s);
+            }
+        } catch (SQLException ex) {
+        }
+        return lst;
+    }
+
+    public boolean deleteDimension(int id) {
+        boolean updated = false;
+        String query = "update Dimension set Status = 0 where DimensionId=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                updated = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Handle exception properly in a production environment
+        }
+        return updated;
+    }
+
+    public boolean addDimension(String name, String type, String description) {
+        boolean added = false;
+        String query = "insert into Dimension (DimensionName, Type, Description,Status) values (?, ?, ?, 1)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, type);
+            ps.setString(3, description);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                added = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Handle exception properly in a production environment
+        }
+        return added;
+    }
+
+    public boolean updateDimension(int id, String name, String type, String description) {
+        boolean updated = false;
+        String query = "update Dimension set DimensionName=?, Type=?, Description=? where DimensionId=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, type);
+            ps.setString(3, description);
+            ps.setInt(4, id);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                updated = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Handle exception properly in a production environment
+        }
+        return updated;
+    }
+
+    public List<Dimension> getListDimension() {
+        List<Dimension> lst = new ArrayList<>();
+
+        try {
+            String query = "select * from Dimension where Status = 1";
+
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String type = rs.getString(3);
+                String description = rs.getString(4);
+
+                Dimension dimension = new Dimension(id, name, type, description);
+                lst.add(dimension);
+            }
+        } catch (SQLException ex) {
+        }
+        return lst;
+    }
+
+    public Dimension getDimensionById(int id) {
+        String query = "select * from Dimension where DimensionId =?";
+        Dimension dimension = null;
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String DimensionName = rs.getString(2);
+                String Type = rs.getString(3);
+                String Description = rs.getString(4);
+                boolean Status = rs.getBoolean(5);
+
+                dimension = new Dimension(id, DimensionName, Type, Description);
+                return dimension;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return dimension;
+    }
+
+    public Subject2 getSubjectById(int id) {
+        String query = "select * from subjects where id =?";
+        Subject2 subject = null;
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString(2);
+                int creator_id = rs.getInt(3);
+                Date creater_at = rs.getDate(4);
+                Date updated_at = rs.getDate(5);
+                int status = rs.getInt(6);
+                String img = rs.getString(7);
+                String description = rs.getString(8);
+                int dimensionId = rs.getInt(9);
+
+                subject = new Subject2(id, name, creator_id, creater_at, updated_at, status, img, description, dimensionId);
+                return subject;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return subject;
+    }
+
+    public boolean updateSubject(int id, String name, String img, int dimensionId, String description) {
+        boolean updated = false;
+        String query = "update subjects set name=? ,img=?, description=?, dimensionId=?, update_at=GETDATE() where id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, img);
+            ps.setString(3, description);
+            ps.setInt(4, dimensionId);
+            ps.setInt(5, id);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                updated = true;
+            }
+        } catch (SQLException ex) {
+
+        }
+        return updated;
+    }
+
+    public boolean insert(String name, String img, int dimensionId, int creator_id, int status, String description) {
+        boolean updated = false;
+        String query = "insert into subjects values(?,?,GETDATE(),null,1,?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setInt(2, creator_id);
+            ps.setString(3, img);
+            ps.setString(4, description);
+            ps.setInt(5, status);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                updated = true;
+            }
+        } catch (SQLException ex) {
+
+        }
+        return updated;
+    }
+
     public List<DimensionDTO> getListDimensionDTO() {
         List<DimensionDTO> lst = new ArrayList<>();
 
@@ -632,6 +863,9 @@ public class Subject2DAO extends DBContext {
         //System.out.println(c.getPaginationRegisterSubject(27, 2, 5));
         //System.out.println(c.getTotalRecords(27));
         //c.deleteRegister(9);
-        System.out.println(c.getPaginationExpertManagerSubjectSearchBySubjectName(1028, 1, 5, "P"));
+        //System.out.println(c.getPaginationExpertManagerSubjectSearchBySubjectName(1028, 1, 5, "P"));
+        //System.out.println(c.getSubjectById(2));
+        System.out.println(c.getListSubjectPackagePriceDTO(2));
+
     }
 }

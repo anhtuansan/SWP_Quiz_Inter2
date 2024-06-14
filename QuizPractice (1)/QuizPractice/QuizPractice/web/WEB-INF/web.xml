@@ -52,6 +52,26 @@
         <servlet-name>LessonManagerController</servlet-name>
         <servlet-class>controller.LessonManagerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubjectDetailExpertController</servlet-name>
+        <servlet-class>controller.SubjectDetailExpertController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditDimensionController</servlet-name>
+        <servlet-class>controller.EditDimensionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddDimensionController</servlet-name>
+        <servlet-class>controller.AddDimensionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteDimensionController</servlet-name>
+        <servlet-class>controller.DeleteDimensionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePackageStatus</servlet-name>
+        <servlet-class>controller.ChangePackageStatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubjectRegisterController</servlet-name>
         <url-pattern>/subjectRegister</url-pattern>
@@ -103,6 +123,26 @@
     <servlet-mapping>
         <servlet-name>LessonManagerController</servlet-name>
         <url-pattern>/lessonManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectDetailExpertController</servlet-name>
+        <url-pattern>/subjectDetailExpert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditDimensionController</servlet-name>
+        <url-pattern>/editDimension</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddDimensionController</servlet-name>
+        <url-pattern>/addDimension</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDimensionController</servlet-name>
+        <url-pattern>/deleteDimension</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePackageStatus</servlet-name>
+        <url-pattern>/changePackageStatus</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

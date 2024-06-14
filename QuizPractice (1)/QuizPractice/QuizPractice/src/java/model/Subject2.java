@@ -116,4 +116,10 @@ public class Subject2 {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Subject2{" + "id=" + id + ", name=" + name + ", creatorId=" + creatorId + ", creatorAt=" + creatorAt + ", updateAt=" + updateAt + ", status=" + status + ", img=" + img + ", description=" + description + ", dimensionId=" + dimensionId + '}';
+    }
+    
 }

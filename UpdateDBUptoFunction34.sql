@@ -150,6 +150,9 @@ CREATE TABLE Dimension (
     Type NVARCHAR(255),                         -- Loại của dimension
     Description NVARCHAR(MAX)                   -- Mô tả của dimension
 );
+ALTER TABLE Dimension
+ADD Status bit;
+
 
 
 --------------------------28

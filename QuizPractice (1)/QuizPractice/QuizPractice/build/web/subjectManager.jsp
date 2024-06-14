@@ -89,7 +89,7 @@
                                 <td>${item.numberOfLesson}</td>
                                 <td>${item.status}</td>
                                
-                                <td><a href="detail.jsp?id=1" class="btn btn-info btn-sm">Detail</a></td>
+                                <td><a href="subjectDetailExpert?id=${item.id}" class="btn btn-info btn-sm">Detail</a></td>
                             </tr>
                         </c:forEach>
 

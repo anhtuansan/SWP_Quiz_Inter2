@@ -229,4 +229,7 @@ select * from subjects;
 insert into subjects values('a',1028,GETDATE(),null,1,'image','dec',2);
 delete from subjects where id = 18;
 
+-------------------------------25
+
+
 
