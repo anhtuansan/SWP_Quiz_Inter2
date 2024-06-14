@@ -40,6 +40,10 @@
         <servlet-name>FileUploadServlet</servlet-name>
         <servlet-class>controller.FileUploadServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubjectManagerController</servlet-name>
+        <servlet-class>controller.SubjectManagerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubjectRegisterController</servlet-name>
         <url-pattern>/subjectRegister</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectManagerController</servlet-name>
+        <url-pattern>/subjectManager</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

@@ -39,7 +39,7 @@
             .subjectList {
                 margin-bottom: 50px;
             }
-            #searchByCategory {
+            #searchByDimension, #searchByStatus {
                 margin-left: 5%;
                 padding: 5% 10%;
             }
@@ -76,76 +76,59 @@
                             <th>Name</th>
                             <th>Dimension</th>
                             <th>Number Lessons</th>
-                            <th>Owner</th>
+                          
                             <th>Status</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Math</td>
-                            <td>Algebra</td>
-                            <td>12</td>
-                            <td>John Doe</td>
-                            <td>Active</td>
-                            <td><a href="detail.jsp?id=1" class="btn btn-info btn-sm">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Science</td>
-                            <td>Physics</td>
-                            <td>10</td>
-                            <td>Jane Doe</td>
-                            <td>Active</td>
-                            <td><a href="detail.jsp?id=2" class="btn btn-info btn-sm">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>History</td>
-                            <td>Ancient</td>
-                            <td>8</td>
-                            <td>Michael Smith</td>
-                            <td>Inactive</td>
-                            <td><a href="detail.jsp?id=3" class="btn btn-info btn-sm">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Geography</td>
-                            <td>World</td>
-                            <td>15</td>
-                            <td>Emily Johnson</td>
-                            <td>Active</td>
-                            <td><a href="detail.jsp?id=4" class="btn btn-info btn-sm">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>English</td>
-                            <td>Grammar</td>
-                            <td>20</td>
-                            <td>Chris Lee</td>
-                            <td>Inactive</td>
-                            <td><a href="detail.jsp?id=5" class="btn btn-info btn-sm">Detail</a></td>
-                        </tr>
+                        <c:forEach var="item" items="${listSubject}">
+                            <tr>
+                                <td>${item.id}</td>
+                                <td>${item.name}</td>
+                                <td>${item.dimensionName}</td>
+                                <td>${item.numberOfLesson}</td>
+                                <td>${item.status}</td>
+                               
+                                <td><a href="detail.jsp?id=1" class="btn btn-info btn-sm">Detail</a></td>
+                            </tr>
+                        </c:forEach>
+
                     </tbody>
                 </table>
+                <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                        <c:choose>
+                            <c:when test="${currentPage > 1}">
+                                <li>
+                                    <a href="subjectManager?page=${currentPage - 1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            </c:when>
+                        </c:choose>
+
+                        <c:forEach var="i" begin="1" end="${totalPages}">
+                            <c:choose>
+                                <c:when test="${i == currentPage}">
+                                    <li class="active"><a href="#">${i}</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <li><a href="subjectManager?page=${i}">${i}</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+
+                        <c:choose>
+                            <c:when test="${currentPage < totalPages}">
+                                <li>
+                                    <a href="subjectManager?page=${currentPage + 1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </c:when>
+                        </c:choose>
                     </ul>
                 </nav>
             </div>
