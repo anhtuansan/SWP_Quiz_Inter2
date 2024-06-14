@@ -68,15 +68,14 @@
         <section class="subjectList">
             <h1 class="heading text-center">Subject list</h1>
             <div class="container">
-                <a href="newSubject.jsp" id="newSubject">New Subject</a>
+                <a href="newSubject" id="newSubject">New Subject</a>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
                             <th>Dimension</th>
-                            <th>Number Lessons</th>
-                          
+                            <th>Number Lessons</th>                         
                             <th>Status</th>
                             <th>Detail</th>
                         </tr>

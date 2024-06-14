@@ -44,6 +44,14 @@
         <servlet-name>SubjectManagerController</servlet-name>
         <servlet-class>controller.SubjectManagerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewSubjectController</servlet-name>
+        <servlet-class>controller.NewSubjectController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LessonManagerController</servlet-name>
+        <servlet-class>controller.LessonManagerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubjectRegisterController</servlet-name>
         <url-pattern>/subjectRegister</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>SubjectManagerController</servlet-name>
         <url-pattern>/subjectManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewSubjectController</servlet-name>
+        <url-pattern>/newSubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonManagerController</servlet-name>
+        <url-pattern>/lessonManager</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

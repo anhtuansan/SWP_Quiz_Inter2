@@ -170,3 +170,63 @@ update blogs set CategoryId = 8
 select b.id, b.title, c.name, b.content, b.status, b.thumbnail 
 from blogs b left join categories c on b.CategoryId = c.id 
 where b.id = 18
+
+
+-----------------------23
+select * from subjects;
+select * from users;
+select * from roles;
+update users set status_id = 2;
+update users set role_id = 3 where id = 1028;
+
+update subjects set creator_id = 1028 where id = 2;
+update subjects set creator_id = 1028 where id = 6;
+update subjects set creator_id = 1028 where id = 7;
+update subjects set creator_id = 1028 where id = 8;
+update subjects set creator_id = 1028 where id = 9;
+update subjects set creator_id = 1028 where id = 10;
+
+insert into roles values('Expert');
+insert into roles values('Sale');
+insert into roles values('Marketing');
+
+
+WITH PagedResults AS (
+    SELECT 
+        s.id, 
+        s.name, 
+        d.DimensionName, 
+        COUNT(sl.lesson_id) as NumberLesson,
+        s.status,
+        ROW_NUMBER() OVER (ORDER BY s.creater_at) AS row_num
+    FROM 
+        subjects s 
+    LEFT JOIN 
+        Dimension d ON s.dimensionId = d.DimensionId
+    LEFT JOIN 
+        subject_has_lesson sl ON sl.subject_id = s.id
+    WHERE 
+        s.creator_id = 1028
+    GROUP BY 
+        s.id, 
+        s.name, 
+        d.DimensionName, 
+        s.status, 
+        s.creater_at
+)
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+select * from Dimension;
+
+
+
+
+-------------------------------------24
+select * from subjects;
+insert into subjects values('a',1028,GETDATE(),null,1,'image','dec',2);
+delete from subjects where id = 18;
+
+

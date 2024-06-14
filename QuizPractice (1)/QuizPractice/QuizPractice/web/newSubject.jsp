@@ -128,56 +128,60 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2"></div>
+                    <!--                    <div class="col-md-3">
+                                            <img src="./images/anhgt_1.jpg" alt="Blog Image" class="img-responsive">
+                                            <br>
+                                            <button class="btn btn-primary btn-sm"> <i class="fa fa-upload"></i> Upload Image</button>
+                                        </div>-->
                     <div class="col-md-3">
-                        <img src="./images/anhgt_1.jpg" alt="Blog Image" class="img-responsive">
+                        <img src="./images/anhgt_1.jpg" alt="Ảnh Subject" class="img-responsive" id="avatarImage">
                         <br>
-                        <button class="btn btn-primary btn-sm"> <i class="fa fa-upload"></i> Upload Image</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="uploadButton">
+                            <i class="fa fa-upload"></i> Tải ảnh lên
+                        </button>
+                        <!-- Input để chọn file ảnh, không hiển thị cho người dùng -->
+                        <input type="file" id="fileInput" style="display: none;">
                     </div>
                     <div class="col-md-1"></div>
 
                     <div class="col-md-6">
-                        <form>
+                        <form action="newSubject" method="POST">
+                            <input type="hidden" id="img" name="img" value="./images/anhgt_1.jpg">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <input type="text" id="name" class="form-control" placeholder="Enter subject name">
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter subject name">
                             </div>
 
                             <div class="form-group">
                                 <label for="category">Dimension:</label>
-                                <select id="category" class="form-control">
-                                    <option selected disabled>Choose Category</option>
-                                    <option value="news">News</option>
-                                    <option value="tutorial">Tutorial</option>
-                                    <option value="review">Review</option>
+                                <select id="dimension" name="dimensionId" class="form-control">
+                                    <option value="" disabled selected>Chọn dimension</option>
+                                    <c:forEach var="dimension" items="${dimensions}">
+                                        <option value="${dimension.id}">${dimension.name}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
-
-                            <div class="form-group">
-                                <label for="owner">Owner:</label>
-                                <input type="text" id="owner" class="form-control" placeholder="Enter owner name">
-                            </div>
-
 
 
                             <div class="form-group">
                                 <label for="description">Description: </label>
-                                <textarea id="description" class="form-control" rows="5" placeholder="Enter description"></textarea>
+                                <textarea id="description" name="description" class="form-control" rows="5" placeholder="Enter description"></textarea>
                             </div>
 
 
 
-                            <div class="form-group">
-                                <label for="status">Status:</label>
-                                <br/>
-                                <label class="switch">  
-
-                                    <input type="checkbox" checked id="status">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
+                            <!--                            <div class="form-group">
+                                                            <label for="status">Status:</label>
+                                                            <br/>
+                                                            <label class="switch">  
+                            
+                                                                <input type="checkbox" checked id="status">
+                                                                <span class="slider round"></span>
+                                                            </label>
+                                                        </div>-->
                             <button type="submit" class="btn btn-primary btn-sm col-md-2">Save</button>
                             <div class="col-md-1"></div>
-                            <button type="submit" class="btn btn-primary btn-sm col-md-2">Back to list</button>
+                            <a href="/QuizPractice/subjectManager" class="btn btn-primary btn-sm col-md-2">Back to list</a>
                         </form>
                     </div>
 
@@ -191,6 +195,36 @@
 
         <!-- side bar có thể thu nhỏ khi màn hình nhỏ  -->
         <script src="js/script.js"></script>
+        
+         <!-- Script để xử lý upload ảnh -->
+    <script>
+        document.getElementById('uploadButton').addEventListener('click', function () {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', function () {
+            var formData = new FormData();
+            formData.append('file', this.files[0]);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'upload', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var fileName = response.fileName;
+                    var avatarImage = document.getElementById('avatarImage');
+                    avatarImage.src = 'images/' + fileName; // Thay đổi src của hình ảnh avatarImage
+                    console.log(fileName);
+
+                    // Cập nhật giá trị của hidden input để lưu vào database
+                    document.getElementById('img').value = 'images/'+fileName;
+                }
+            };
+            xhr.send(formData);
+        });
+    </script>
+        
+        
         <!-- Bootstrap Toggle JS and CSS (optional) -->
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>

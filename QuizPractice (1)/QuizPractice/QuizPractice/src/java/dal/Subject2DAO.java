@@ -9,6 +9,8 @@ import dto.DimensionDTO;
 import dto.MyRegisterDTO;
 import dto.SubjectManagerDTO;
 import java.beans.Statement;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -44,6 +46,27 @@ public class Subject2DAO extends DBContext {
         return instance;
     }
 
+  
+  public boolean insert(String name, String img, int dimensionId, int creator_id, int status,String description) {
+        boolean updated = false;
+        String query = "insert into subjects values(?,?,GETDATE(),null,1,?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1,name);
+            ps.setInt(2, creator_id);
+            ps.setString(3,img);
+            ps.setString(4,description);
+            ps.setInt(5, status);        
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                updated = true;
+            }
+        } catch (SQLException ex) {
+            
+        }
+        return updated;
+    }
     public List<DimensionDTO> getListDimensionDTO() {
         List<DimensionDTO> lst = new ArrayList<>();
 
@@ -159,7 +182,8 @@ public class Subject2DAO extends DBContext {
         }
         return 0;
     }
-     public int getTotalRecordsExpertManagerSubjectSearchByDimensionId(int userId, int dimensionId) {
+
+    public int getTotalRecordsExpertManagerSubjectSearchByDimensionId(int userId, int dimensionId) {
         String query = "SELECT COUNT(*) FROM subjects WHERE creator_id = ? and dimensionId = ?";
         try {
             ps = connection.prepareStatement(query);
@@ -178,8 +202,8 @@ public class Subject2DAO extends DBContext {
         }
         return 0;
     }
-     
-     public int getTotalRecordsExpertManagerSubjectSearchByStatus(int userId, int status) {
+
+    public int getTotalRecordsExpertManagerSubjectSearchByStatus(int userId, int status) {
         String query = "SELECT COUNT(*) FROM subjects WHERE creator_id = ? and status = ?";
         try {
             ps = connection.prepareStatement(query);
@@ -297,7 +321,7 @@ public class Subject2DAO extends DBContext {
         }
         return lst;
     }
-    
+
     public List<SubjectManagerDTO> getPaginationExpertManagerSubjectSearchByDimensionId(int userId, int page, int recordsPerPage, int dimensionId) {
         List<SubjectManagerDTO> lst = new ArrayList<>();
         int start = (page - 1) * recordsPerPage + 1;
@@ -353,6 +377,7 @@ public class Subject2DAO extends DBContext {
         }
         return lst;
     }
+
     public List<SubjectManagerDTO> getPaginationExpertManagerSubjectSearchByStatus(int userId, int page, int recordsPerPage, int statusInput) {
         List<SubjectManagerDTO> lst = new ArrayList<>();
         int start = (page - 1) * recordsPerPage + 1;
@@ -408,7 +433,6 @@ public class Subject2DAO extends DBContext {
         }
         return lst;
     }
-
 
     public boolean deleteRegister(int id) {
         // SQL query with placeholders for parameterized input
