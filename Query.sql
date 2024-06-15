@@ -230,6 +230,24 @@ insert into subjects values('a',1028,GETDATE(),null,1,'image','dec',2);
 delete from subjects where id = 18;
 
 -------------------------------25
+select * from Dimension;
+update Dimension set Status = 1;
+
+SELECT 
+    pp.*,
+    CASE 
+        WHEN EXISTS (
+            SELECT 1 
+            FROM subject_has_price_package shpp 
+            WHERE shpp.price_package_id = pp.id 
+              AND shpp.subject_id = 3
+        ) THEN 'active'
+        ELSE 'inactive'
+    END AS status
+FROM 
+package_price pp;
 
 
 
+
+--------------21

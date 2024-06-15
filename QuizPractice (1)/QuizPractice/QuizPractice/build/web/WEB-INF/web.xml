@@ -72,6 +72,22 @@
         <servlet-name>ChangePackageStatus</servlet-name>
         <servlet-class>controller.ChangePackageStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SliderManagerController</servlet-name>
+        <servlet-class>controller.SliderManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeSliderStatusServlet</servlet-name>
+        <servlet-class>controller.ChangeSliderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSliderServlet</servlet-name>
+        <servlet-class>controller.AddSliderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSliderServlet</servlet-name>
+        <servlet-class>controller.EditSliderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubjectRegisterController</servlet-name>
         <url-pattern>/subjectRegister</url-pattern>
@@ -143,6 +159,22 @@
     <servlet-mapping>
         <servlet-name>ChangePackageStatus</servlet-name>
         <url-pattern>/changePackageStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SliderManagerController</servlet-name>
+        <url-pattern>/sliderManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeSliderStatusServlet</servlet-name>
+        <url-pattern>/changeSliderStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSliderServlet</servlet-name>
+        <url-pattern>/addSlider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSliderServlet</servlet-name>
+        <url-pattern>/editSlider</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

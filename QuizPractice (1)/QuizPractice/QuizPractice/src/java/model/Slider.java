@@ -22,4 +22,6 @@ public class Slider {
     private Date CreatedAt;
     private int CreatedBy;
     private int Status;
+    
+    
 }
