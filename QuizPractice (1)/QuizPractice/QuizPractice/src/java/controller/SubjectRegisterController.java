@@ -61,6 +61,7 @@ public class SubjectRegisterController extends HttpServlet {
         if (user != null) {
             try {
                 subject2DAO.addNewSubjectRegister(subjectId, user.getUserId(), pricePackageId);
+                response.sendRedirect("myRegister");
             } catch (Exception ex) {
                  PrintWriter out = response.getWriter();
                  out.println("<p>" + ex + "</p>");
@@ -80,7 +81,7 @@ public class SubjectRegisterController extends HttpServlet {
                 subject2DAO.addNewSubjectRegister(subjectId, userId, pricePackageId);
                 PrintWriter out = response.getWriter();
                 out.println("<p>" + "Register successfully"+ "</p>");
-                
+                 response.sendRedirect("myRegister");
             } catch (Exception ex) {
                  PrintWriter out = response.getWriter();
                  out.println("<p>" + ex + "</p>");

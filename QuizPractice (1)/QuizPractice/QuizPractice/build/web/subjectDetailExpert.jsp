@@ -73,7 +73,7 @@
             <h1 class="heading col-md-3">Subject Details              
             </h1>
             <div class="col-md-6"></div>
-            <a class="col-md-3" id="lessonManager">Lesson Manager</a>
+            <a class="col-md-3" id="lessonManager" href="lessonManager?subjectId=${subject.id}">Lesson Manager</a>
 
             <div class="container col-md-12" id="tabBar">
 

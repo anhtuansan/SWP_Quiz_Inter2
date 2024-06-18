@@ -40,7 +40,7 @@ left join package_price p on p.id = r.PackageId
 WHERE r.UserId = 27
 
 
-WITH PagedResults AS (
+WITH PagedResults AS (	
     SELECT r.id,s.name AS subject_name, r.CreatedAt, p.name AS package_name, p.original_price, r.Status,
            ROW_NUMBER() OVER (ORDER BY r.CreatedAt) AS row_num
     FROM Subject_Register r 
@@ -251,3 +251,151 @@ package_price pp;
 
 
 --------------21
+select * from Slider;
+
+
+
+WITH PagedResults AS (
+    SELECT 
+       *, 
+        ROW_NUMBER() OVER (ORDER BY CreatedAt) AS row_num
+    FROM 
+        Slider
+   )
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+select count(*) as total from Slider;
+
+select Status from Slider where ID = 1
+
+update Slider set Status = 1 where ID = 1
+
+insert into Slider values('dfas','dfsa','dsa','fdsa','fdas',GETDATE(),1028,1);
+select * from users
+
+update Slider set Title='t',SubTitle='t',Content='t',Image='dfsa',LinkUrl='t',Status=1
+where ID = 6
+
+
+
+
+
+
+
+
+------------------------------28-------------------------------
+select * from lessons;
+select * from subject_has_lesson;
+
+	WITH PagedResults AS (
+		SELECT 
+		   *, 
+			ROW_NUMBER() OVER (ORDER BY LessonIndex) AS row_num
+		FROM 
+			lessons
+		where id in (select lesson_id from subject_has_lesson where subject_id=2)
+	   )
+	SELECT * 
+	FROM PagedResults
+	WHERE row_num BETWEEN 1 AND 5
+	ORDER BY row_num;
+
+
+select count(*) as total from lessons 
+where id in 
+(select lesson_id from subject_has_lesson 
+where subject_id=2) ;
+
+
+--search name
+WITH PagedResults AS (
+    SELECT 
+       *, 
+        ROW_NUMBER() OVER (ORDER BY LessonIndex) AS row_num
+    FROM 
+        lessons
+	where id in (select lesson_id from subject_has_lesson where subject_id=2) and name like '%2%'
+   )
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+
+select count(*) as total from lessons 
+where id in 
+(select lesson_id from subject_has_lesson 
+where subject_id=2  and name like '%2%' ) ;
+
+
+
+--search status
+WITH PagedResults AS (
+    SELECT 
+       *, 
+        ROW_NUMBER() OVER (ORDER BY LessonIndex) AS row_num
+    FROM 
+        lessons
+	where id in (select lesson_id from subject_has_lesson where subject_id=2) and status = 1
+   )
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+
+select count(*) as total from lessons 
+where id in 
+(select lesson_id from subject_has_lesson 
+where subject_id=2   and status = 1) ;
+
+
+
+--search type
+WITH PagedResults AS (
+    SELECT 
+       *, 
+        ROW_NUMBER() OVER (ORDER BY LessonIndex) AS row_num
+    FROM 
+        lessons
+	where id in (select lesson_id from subject_has_lesson where subject_id=2) and Type = 'content'
+   )
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+
+select count(*) as total from lessons 
+where id in 
+(select lesson_id from subject_has_lesson 
+where subject_id=2   and Type = 'content')
+;
+
+
+--add
+select * from lessons;
+
+insert into lessons values('Lam quen voi String',1028,null,GETDATE(),1,'',null,2,'content')
+
+SELECT @@IDENTITY AS LastInsertedId;
+
+insert into subject_has_lesson values(2,1002);	
+
+
+--edit
+select * from lessons where id = 1;
+
+update lessons set name=? ,content=?, media=?, LessonIndex=?, Type=? 
+where id = 1;
+
+update lessons set status = 1 where id = 1;
+
+
+
+
+--dieukien
+select creator_id from subjects where id = 2;

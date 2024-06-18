@@ -88,6 +88,10 @@
         <servlet-name>EditSliderServlet</servlet-name>
         <servlet-class>controller.EditSliderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetLessonById</servlet-name>
+        <servlet-class>controller.GetLessonById</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubjectRegisterController</servlet-name>
         <url-pattern>/subjectRegister</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>EditSliderServlet</servlet-name>
         <url-pattern>/editSlider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetLessonById</servlet-name>
+        <url-pattern>/getLessonById</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
