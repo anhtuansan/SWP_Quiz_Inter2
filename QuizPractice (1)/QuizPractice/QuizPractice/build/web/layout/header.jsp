@@ -175,7 +175,7 @@
                                 <li><a href="<%=request.getContextPath()%>/newmenu1">Home</a></li>
                                 <li><a href="<%=request.getContextPath()%>/newmenu2">Dashboard</a></li>
                                 <li><a href="<%=request.getContextPath()%>/newmenu3">Blog Manager</a></li>
-                                <li><a href="<%=request.getContextPath()%>/newmenu3">Slider Manager</a></li>
+                                <li><a href="<%=request.getContextPath()%>/sliderManager">Slider Manager</a></li>
                                
                            
                             </c:when>

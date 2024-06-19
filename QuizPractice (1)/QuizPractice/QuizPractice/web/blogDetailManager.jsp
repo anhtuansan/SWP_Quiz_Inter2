@@ -115,7 +115,7 @@
                         <i class="fa fa-upload"></i> Tải ảnh lên
                     </button>
                     <!-- Input để chọn file ảnh, không hiển thị cho người dùng -->
-                    <input type="file" id="fileInput" style="display: none;">
+                    <input type="file" id="fileInput" style="display: none;" accept="image/*">
                 </div>
                 <div class="col-md-2"></div>
                 <div class="col-md-6">

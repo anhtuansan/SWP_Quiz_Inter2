@@ -12,8 +12,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Category;
+import model.User;
 
 /**
  *
@@ -38,7 +40,17 @@ public class BlogDetailManagerController extends HttpServlet {
         if (id == -1) {
             // ID không hợp lệ hoặc không được truyền vào
             // Chuyển hướng đến trang lỗi hoặc trang mặc định
-            response.sendRedirect("errorPage.jsp"); // hoặc trang mặc định
+            String message = "ID BLOG NOT FOUND!";
+             response.sendRedirect("/QuizPractice?error=true&message=" + message);
+          
+            return;
+        }
+        
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null || user.getRoleId()!=5) {
+             String message = "Permission granted! Login with role marketing to access page.";
+             response.sendRedirect("/QuizPractice?error=true&message=" + message);
             return;
         }
 

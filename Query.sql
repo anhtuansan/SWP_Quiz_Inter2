@@ -29,11 +29,12 @@ SELECT SCOPE_IDENTITY() AS LastInsertedId;
 SELECT @@IDENTITY AS LastInsertedId;
 
 
---------------------Menu - Role(1-user, 2-admin, 3-sale, 4-marketing, 5-expert)
+--------------------Menu - Role(1-user, 2-admin, 3-expert, 4-sale, 5-marketing)
 ------------------------------13
 --------------------Subject register : Status(pending/done)
 select * from Subject_Register;
 select * from users;
+select * from roles;
 
 select r.id,s.name, r.CreatedAt, p.name, p.original_price, r.Status 
 from Subject_Register r 
