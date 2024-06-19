@@ -48,8 +48,8 @@ public class Subject2DAO extends DBContext {
         }
         return instance;
     }
-    
-     public boolean addSubjectPricePackage(int packageId, int subjectId) {
+
+    public boolean addSubjectPricePackage(int packageId, int subjectId) {
         boolean updated = false;
         String query = "insert into subject_has_price_package values(?,?)";
         try {
@@ -66,8 +66,8 @@ public class Subject2DAO extends DBContext {
         }
         return updated;
     }
-     
-      public boolean deleteSubjectPricePackage(int packageId, int subjectId) {
+
+    public boolean deleteSubjectPricePackage(int packageId, int subjectId) {
         boolean updated = false;
         String query = "delete from subject_has_price_package where subject_id=? and price_package_id=?";
         try {
@@ -84,8 +84,6 @@ public class Subject2DAO extends DBContext {
         }
         return updated;
     }
-    
-    
 
     public List<SubjectPackagePriceDTO> getListSubjectPackagePriceDTO(int subjectId) {
         List<SubjectPackagePriceDTO> lst = new ArrayList<>();
@@ -109,14 +107,13 @@ public class Subject2DAO extends DBContext {
             ps.setInt(1, subjectId);
             rs = ps.executeQuery();
 
-            while (rs.next()) {                
+            while (rs.next()) {
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
-                int duration  = rs.getInt(3);
+                int duration = rs.getInt(3);
                 double salePrice = rs.getDouble(4);
                 double price = rs.getDouble(5);
                 String status = rs.getString(7);
-                
 
                 SubjectPackagePriceDTO s = new SubjectPackagePriceDTO(id, name, duration, price, salePrice, status);
                 lst.add(s);
@@ -726,6 +723,146 @@ public class Subject2DAO extends DBContext {
         return lst;
     }
 
+    //------------------------------------------------------
+    public List<MyRegisterDTO> getPaginationRegisterSubjectAll(int userId, int page, int recordsPerPage, Integer dimensionId, String subjectName, String description) {
+        List<MyRegisterDTO> lst = new ArrayList<>();
+        int start = (page - 1) * recordsPerPage + 1;
+        int end = start + recordsPerPage - 1;
+
+        try {
+            StringBuilder query = new StringBuilder("WITH PagedResults AS (")
+                    .append("    SELECT r.id, s.name AS subject_name, r.CreatedAt, p.name AS package_name, p.original_price, r.Status,")
+                    .append("           ROW_NUMBER() OVER (ORDER BY r.CreatedAt) AS row_num")
+                    .append("    FROM Subject_Register r")
+                    .append("    LEFT JOIN subjects s ON r.SubjectId = s.id")
+                    .append("    LEFT JOIN package_price p ON p.id = r.PackageId")
+                    .append("    WHERE r.UserId = ?");
+
+            if (dimensionId != null && dimensionId != -1) {
+                query.append(" AND s.dimensionId = ?");
+            }
+            if (subjectName != null && !subjectName.isEmpty()) {
+                query.append(" AND s.name LIKE ?");
+            }
+            if (description != null && !description.isEmpty()) {
+                query.append(" AND s.description LIKE ?");
+            }
+
+            query.append(")")
+                    .append("SELECT * ")
+                    .append("FROM PagedResults ")
+                    .append("WHERE row_num BETWEEN ? AND ? ")
+                    .append("ORDER BY row_num;");
+
+            ps = connection.prepareStatement(query.toString());
+            int paramIndex = 1;
+            System.out.println("User ID: " + userId);
+            ps.setInt(paramIndex++, userId);
+
+            if (dimensionId != null && dimensionId != -1) {
+                System.out.println("Dimension ID: " + dimensionId);
+                ps.setInt(paramIndex++, dimensionId);
+            }
+            if (subjectName != null && !subjectName.isEmpty()) {
+                System.out.println("Subject Name: " + subjectName);
+                ps.setString(paramIndex++, "%" + subjectName + "%");
+            }
+            if (description != null && !description.isEmpty()) {
+                System.out.println("Description: " + description);
+                ps.setString(paramIndex++, "%" + description + "%");
+            }
+
+            System.out.println("Start: " + start);
+            ps.setInt(paramIndex++, start);
+
+            System.out.println("End: " + end);
+            ps.setInt(paramIndex++, end);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String subjectNameResult = rs.getString(2);
+                Date createdAt = rs.getDate(3);
+                String packageName = rs.getString(4);
+                double originalPrice = rs.getDouble(5);
+                String status = rs.getString(6);
+
+                MyRegisterDTO register = new MyRegisterDTO(id, subjectNameResult, createdAt, packageName, originalPrice, status);
+                lst.add(register);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (rs != null) try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (ps != null) try {
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return lst;
+    }
+
+    public int getTotalRecords(int userId, Integer dimensionId, String subjectName, String description) {
+        StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM Subject_Register r ")
+                .append("LEFT JOIN subjects s ON r.SubjectId = s.id ")
+                .append("WHERE r.UserId = ?");
+
+        if (dimensionId != null) {
+            query.append(" AND s.dimensionId = ?");
+        }
+        if (subjectName != null && !subjectName.isEmpty()) {
+            query.append(" AND s.name LIKE ?");
+        }
+        if (description != null && !description.isEmpty()) {
+            query.append(" AND s.description LIKE ?");
+        }
+
+        try {
+            ps = connection.prepareStatement(query.toString());
+            int paramIndex = 1;
+            ps.setInt(paramIndex++, userId);
+
+            if (dimensionId != null) {
+                ps.setInt(paramIndex++, dimensionId);
+            }
+            if (subjectName != null && !subjectName.isEmpty()) {
+                ps.setString(paramIndex++, "%" + subjectName + "%");
+            }
+            if (description != null && !description.isEmpty()) {
+                ps.setString(paramIndex++, "%" + description + "%");
+            }
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            // Log the exception (if a logging framework is available)
+            e.printStackTrace(); // Replace with logger in real application
+        } finally {
+            if (rs != null) try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (ps != null) try {
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return 0;
+    }
+
+    //---------------------------------------
     public int getTotalRecords(int userId) {
         String query = "SELECT COUNT(*) FROM Subject_Register WHERE UserId = ?";
         try {
@@ -865,7 +1002,9 @@ public class Subject2DAO extends DBContext {
         //c.deleteRegister(9);
         //System.out.println(c.getPaginationExpertManagerSubjectSearchBySubjectName(1028, 1, 5, "P"));
         //System.out.println(c.getSubjectById(2));
-        System.out.println(c.getListSubjectPackagePriceDTO(2));
+//        System.out.println(c.getListSubjectPackagePriceDTO(2));
+        System.out.println(c.getPaginationRegisterSubjectAll(27, 1, 5, null, null, null));
+        System.out.println(c.getTotalRecords(27, null, null, null));
 
     }
 }

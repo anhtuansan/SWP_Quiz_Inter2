@@ -4,39 +4,57 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/AddSliderServlet.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/LogoutController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/SubjectRegisterController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/BlogDetailManagerController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/login.jsp</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/BlogDAO.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/blogDetailManager.jsp</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/util/mail/Mail.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/GetLessonById.java</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/LessonDAO.java</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/context/DBContext.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/BlogManagerController.java</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/PracticeDAO.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/myRegister.jsp</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/SliderManagerController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/sliderDetailManager.jsp</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/EditDimensionController.java</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/BlogDetailController.java</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/LessonManagerController.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/PracticeListController.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/SubjectDetailsController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/ChangeSliderServlet.java</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/model/Lesson2.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/model/Slider.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/EditSliderServlet.java</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/layout/header.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/model/Lesson.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/NewPracticeController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/SubjectServlet.java</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/ErrorHandleController.java</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/lessonManager.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/newSubject.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/LoginController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/layout/searchSubjectList.jsp</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/subjectDetailExpert.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dto/DimensionDTO.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/SubjectManagerController.java</file>
-            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/sliderManager.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/RegisterController.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/layout/searchMyRegister.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/layout/subjectRegisterPopUp.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/MyRegisterServlet.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/SliderDAO.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/Subject2DAO.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/BlogDAO.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/util/mail/Mail.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/LessonDAO.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/context/DBContext.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/PracticeDAO.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/SliderManagerController.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dto/MyRegisterDTO.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/EditDimensionController.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/BlogDetailController.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/LessonManagerController.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/subject.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/model/Lesson2.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/LessonServlet.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/home.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/layout/header.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/ErrorHandleController.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/lessonManager.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/js/script.js</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/playlist.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/HomeController.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/subjectDetailExpert.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/sliderManager.jsp</file>
         </group>
     </open-files>
 </project-private>

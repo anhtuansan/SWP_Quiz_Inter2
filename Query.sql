@@ -48,13 +48,56 @@ WITH PagedResults AS (
     FROM Subject_Register r 
     LEFT JOIN subjects s ON r.SubjectId = s.id
     LEFT JOIN package_price p ON p.id = r.PackageId
-    WHERE r.UserId = 27
+    WHERE r.UserId = 27 
 )
 SELECT * 
 FROM PagedResults
 WHERE row_num BETWEEN 1 AND 5
 ORDER BY row_num;
 
+WITH PagedResults AS (	
+    SELECT r.id,s.name AS subject_name, r.CreatedAt, p.name AS package_name, p.original_price, r.Status,
+           ROW_NUMBER() OVER (ORDER BY r.CreatedAt) AS row_num
+    FROM Subject_Register r 
+    LEFT JOIN subjects s ON r.SubjectId = s.id
+    LEFT JOIN package_price p ON p.id = r.PackageId
+    WHERE r.UserId = 27 and s.dimensionId = 2
+)
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+WITH PagedResults AS (	
+    SELECT r.id,s.name AS subject_name, r.CreatedAt, p.name AS package_name, p.original_price, r.Status,
+           ROW_NUMBER() OVER (ORDER BY r.CreatedAt) AS row_num
+    FROM Subject_Register r 
+    LEFT JOIN subjects s ON r.SubjectId = s.id
+    LEFT JOIN package_price p ON p.id = r.PackageId
+    WHERE r.UserId = 27 and s.name like '%p%' 
+)
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+WITH PagedResults AS (	
+    SELECT r.id,s.name AS subject_name, r.CreatedAt, p.name AS package_name, p.original_price, r.Status,
+           ROW_NUMBER() OVER (ORDER BY r.CreatedAt) AS row_num
+    FROM Subject_Register r 
+    LEFT JOIN subjects s ON r.SubjectId = s.id
+    LEFT JOIN package_price p ON p.id = r.PackageId
+    WHERE r.UserId = 27 and s.description like '%fdsafadsf%' 
+)
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+
+select * from Dimension
+
+select * from users;
 
 select * from subjects;
 insert into Subject_Register 
