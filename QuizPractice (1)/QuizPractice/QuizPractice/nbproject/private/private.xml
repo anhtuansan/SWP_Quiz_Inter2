@@ -10,6 +10,7 @@
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/BlogDAO.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/blogDetailManager.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/util/mail/Mail.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/GetLessonById.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/LessonDAO.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/context/DBContext.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/BlogManagerController.java</file>
@@ -30,6 +31,7 @@
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/ErrorHandleController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/lessonManager.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/layout/searchSubjectList.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/subjectDetailExpert.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/SubjectManagerController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/sliderManager.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/layout/subjectRegisterPopUp.jsp</file>

@@ -32,6 +32,24 @@ public class UserDAO extends DBContext {
         return instance;
     }
 
+    public int getLastUserId() {
+        String query = "SELECT @@IDENTITY AS LastInsertedId";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                return id;
+            }
+
+        } catch (SQLException e) {
+            // Log the exception (if a logging framework is available)
+            e.printStackTrace(); // Replace with logger in real application
+        }
+        return 0;
+    }
+
     public boolean checkExistByEmail(String email) {
         boolean isDuplicate = true;
         String sql = "Select 1 From users where email =?";
@@ -144,7 +162,7 @@ public class UserDAO extends DBContext {
             ps.setDate(7, user.getCreatedAt());
             ps.setDate(8, user.getUpdatedAt());
             ps.setInt(9, user.getRoleId());
-            ps.setInt(10, user.getStatusID());
+            ps.setInt(10, 2);
             ps.setString(11, user.getToken());
 
             // Execute the query and get the number of rows affected
@@ -314,7 +332,7 @@ public class UserDAO extends DBContext {
                 + "      ,[gender] = ?\n"
                 + " WHERE [email] = ?";
         int gen = 0;
-        if(gender.equals("true")) {
+        if (gender.equals("true")) {
             gen = 1;
         }
         int rowAffected = 0;

@@ -6,16 +6,22 @@ package controller;
 
 import dal.Subject2DAO;
 import dal.SubjectDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import model.PricePackage2;
 import model.User;
+import util.mail.Mail;
+import util.security.CodeVerify;
+import util.security.Security;
 
 /**
  *
@@ -61,30 +67,59 @@ public class SubjectRegisterController extends HttpServlet {
         if (user != null) {
             try {
                 subject2DAO.addNewSubjectRegister(subjectId, user.getUserId(), pricePackageId);
-                response.sendRedirect("myRegister");
+                response.sendRedirect("/QuizPractice?success=true");
             } catch (Exception ex) {
-                 PrintWriter out = response.getWriter();
-                 out.println("<p>" + ex + "</p>");
+                String message = "Đăng ký không thành công!";
+                response.sendRedirect("/QuizPractice?error=true&message=" + message);
             }
-        } 
-        
-        //Nếu chưa logged in thì tạo user vơi thông tin nhập vào và lấy id cho vào bảng
+        } //Nếu chưa logged in thì tạo user vơi thông tin nhập vào và lấy id cho vào bảng
         else {
+
             String userName = request.getParameter("userName");
             String email = request.getParameter("email");
             String phoneNumber = request.getParameter("phoneNumber");
             String gender = request.getParameter("gender");
-            
+            String password = "123";//default
+            String token = CodeVerify.generateVerificationCode();
+            password = Security.encryptToSHA512(password);
+
+            User user2 = new User();
+            user2.setFullName(userName);
+            user2.setEmail(email);
+            user2.setPhoneNumber(phoneNumber);
+            user2.setGender(Boolean.parseBoolean(gender));
+            user2.setPassword(password);
+            user2.setToken(token);
             try {
-                subject2DAO.addNewUser(userName, email, phoneNumber, gender);
-                int userId = subject2DAO.getLastUserId(); 
+//                subject2DAO.addNewUser(userName, email, phoneNumber, gender, password);
+
+
+                UserDAO userDAO = UserDAO.getInstance();
+                userDAO.insert(user2);  // Insert the user into the database
+                
+                int userId = userDAO.getLastUserId();
                 subject2DAO.addNewSubjectRegister(subjectId, userId, pricePackageId);
-                PrintWriter out = response.getWriter();
-                out.println("<p>" + "Register successfully"+ "</p>");
-                 response.sendRedirect("myRegister");
+                
+                // Create an activation link
+                String activeLink = request.getScheme() + "://"
+                        + request.getServerName()
+                        + ":"
+                        + request.getServerPort()
+                        + "/QuizPractice/active";
+
+                // Send a verification email
+                boolean mailSent = Mail.sendMailVerify(email, token, activeLink);
+                if (mailSent) {
+                    response.sendRedirect("/QuizPractice?success=true&message=Registration successful./nCheck your email and login with password : 123");
+                } else {
+                    throw new Exception("Failed to send verification email.");
+                }
+
             } catch (Exception ex) {
-                 PrintWriter out = response.getWriter();
-                 out.println("<p>" + ex + "</p>");
+                ex.printStackTrace();
+                // Mã hóa thông điệp lỗi để hiển thị trên URL
+                String message = URLEncoder.encode("Đăng ký không thành công: " + ex.getMessage(), "UTF-8");
+                response.sendRedirect("/QuizPractice?error=true&message=" + message);
             }
 
         }

@@ -23,20 +23,33 @@ public class HomeController extends HttpServlet {
     // Handles GET requests
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
+        // Kiểm tra và nhận tham số lỗi từ URL
+        String errorMessage = request.getParameter("error");
+        String successMessage = request.getParameter("success");
+        String message = request.getParameter("message");
+
+        if (errorMessage != null && errorMessage.equals("true")) {
+            request.setAttribute("error", "true");
+            request.setAttribute("errorMessage", message);
+        } else if (successMessage != null && successMessage.equals("true")) {
+            request.setAttribute("success", "true");
+            request.setAttribute("successMessage", message);
+        }
+
         // Forward the request to the home.jsp page
         BlogDAO blogDAO = BlogDAO.getInstance();
         SliderDAO sliderDAO = SliderDAO.getInstance();
         SubjectDAO subjectDAO = SubjectDAO.getInstance();
-        
+
         List<Blog> top8Blog = blogDAO.listTop8Blog();
         List<Slider> top8Slider = sliderDAO.listTop8Slider();
         List<Subject> top8Subject = subjectDAO.listTop8Subject();
         List<Subject> top3Subject = subjectDAO.find3FeatureSubject();
-        
+
         HttpSession session = request.getSession();
-        
-         // Đặt các danh sách vào phạm vi request
+
+        // Đặt các danh sách vào phạm vi request
         request.setAttribute("top8Blog", top8Blog);
         request.setAttribute("top8Slider", top8Slider);
         request.setAttribute("top8Subject", top8Subject);
@@ -44,12 +57,12 @@ public class HomeController extends HttpServlet {
 
         // Chuyển hướng đến trang home.jsp
         request.getRequestDispatcher("/home.jsp").forward(request, response);
-    } 
+    }
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * This method is currently not implemented.
-     * 
+    /**
+     * Handles the HTTP <code>POST</code> method. This method is currently not
+     * implemented.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -57,14 +70,14 @@ public class HomeController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         // Currently, no implementation for POST requests.
         // Typically, you might forward to doGet(request, response) or handle POST-specific logic.
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
-     * 
+     *
      * @return a String containing servlet description
      */
     @Override

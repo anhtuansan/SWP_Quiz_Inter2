@@ -27,6 +27,33 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <!-- SweetAlert2 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                const error = urlParams.get('error');
+                const message = urlParams.get('message');
+                const success = urlParams.get('success');
+
+                if (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: message ? decodeURIComponent(message) : 'Something went wrong!',
+                    });
+                } else if (success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: message ? decodeURIComponent(message) : 'Action completed successfully!',
+                    });
+                }
+            });
+        </script>
     </head>
     <body>
 
@@ -35,10 +62,10 @@
 
         <!-- sidebar -->
         <%@include file="layout/sidebar.jsp" %>
-        
+
         <!--profile pop-up-->
         <%@include file="layout/profile.jsp" %>
-        
+
         <!--change password pop-up-->
         <%@include file="layout/changePassword.jsp" %>
 

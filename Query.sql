@@ -17,6 +17,8 @@ select * from Subject_Register;
 insert into Subject_Register 
 values(2,27,1,null,null,null,'pending');
 
+delete from Subject_Register where id = 2004;
+delete from users where id > 3000;
 
 select * from users;
 insert into users(full_name, email, phone_number, password,gender,created_at,role_id,status_id) 
