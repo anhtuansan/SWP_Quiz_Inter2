@@ -372,6 +372,126 @@ public class Subject2DAO extends DBContext {
         return lst;
     }
 
+    //-----------------------------------
+    public List<SubjectManagerDTO> getPaginationExpertManagerSubjectAll(int userId, int page, int recordsPerPage, String searchName, Integer dimensionId, Integer status) {
+        List<SubjectManagerDTO> lst = new ArrayList<>();
+        int start = (page - 1) * recordsPerPage + 1;
+        int end = start + recordsPerPage - 1;
+
+        try {
+            StringBuilder query = new StringBuilder("WITH PagedResults AS (")
+                    .append("SELECT ")
+                    .append("s.id, ")
+                    .append("s.name, ")
+                    .append("d.DimensionName, ")
+                    .append("COUNT(sl.lesson_id) as NumberLesson, ")
+                    .append("s.status, ")
+                    .append("ROW_NUMBER() OVER (ORDER BY s.creater_at) AS row_num ")
+                    .append("FROM subjects s ")
+                    .append("LEFT JOIN Dimension d ON s.dimensionId = d.DimensionId ")
+                    .append("LEFT JOIN subject_has_lesson sl ON sl.subject_id = s.id ")
+                    .append("WHERE s.creator_id = ? ");
+
+            if (searchName != null && !searchName.isEmpty()) {
+                query.append("AND s.name LIKE ? ");
+            }
+            if (dimensionId != null) {
+                query.append("AND s.dimensionId = ? ");
+            }
+            if (status != null) {
+                query.append("AND s.status = ? ");
+            }
+
+            query.append("GROUP BY ")
+                    .append("s.id, ")
+                    .append("s.name, ")
+                    .append("d.DimensionName, ")
+                    .append("s.status, ")
+                    .append("s.creater_at) ")
+                    .append("SELECT * FROM PagedResults ")
+                    .append("WHERE row_num BETWEEN ? AND ? ")
+                    .append("ORDER BY row_num");
+
+            ps = connection.prepareStatement(query.toString());
+            int paramIndex = 1;
+            ps.setInt(paramIndex++, userId);
+
+            if (searchName != null && !searchName.isEmpty()) {
+                ps.setString(paramIndex++, "%" + searchName + "%");
+            }
+            if (dimensionId != null) {
+                ps.setInt(paramIndex++, dimensionId);
+            }
+            if (status != null) {
+                ps.setInt(paramIndex++, status);
+            }
+
+            ps.setInt(paramIndex++, start);
+            ps.setInt(paramIndex++, end);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String dimensionName = rs.getString(3);
+                int numberOfLesson = rs.getInt(4);
+                int statusValue = rs.getInt(5);
+
+                SubjectManagerDTO subjectManagerDTO = new SubjectManagerDTO(id, name, dimensionName, numberOfLesson, statusValue);
+                lst.add(subjectManagerDTO);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Handle the exception properly
+        }
+        return lst;
+    }
+
+    public int getTotalRecordsExpertManagerSubjectAll(int userId, String searchName, Integer dimensionId, Integer status) {
+        int totalRecords = 0;
+        StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM subjects s ")
+                .append("LEFT JOIN Dimension d ON s.dimensionId = d.DimensionId ")
+                .append("WHERE s.creator_id = ? ");
+
+        if (searchName != null && !searchName.isEmpty()) {
+            query.append("AND s.name LIKE ? ");
+        }
+        if (dimensionId != null) {
+            query.append("AND s.dimensionId = ? ");
+        }
+        if (status != null) {
+            query.append("AND s.status = ? ");
+        }
+
+        try {
+            ps = connection.prepareStatement(query.toString());
+            int paramIndex = 1;
+            ps.setInt(paramIndex++, userId);
+
+            if (searchName != null && !searchName.isEmpty()) {
+                ps.setString(paramIndex++, "%" + searchName + "%");
+            }
+            if (dimensionId != null) {
+                ps.setInt(paramIndex++, dimensionId);
+            }
+            if (status != null) {
+                ps.setInt(paramIndex++, status);
+            }
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                totalRecords = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            // Log the exception (if a logging framework is available)
+            e.printStackTrace(); // Replace with logger in real application
+        }
+
+        return totalRecords;
+    }
+
+    //----------------------
     public int getTotalRecordsExpertManagerSubject(int userId) {
         String query = "SELECT COUNT(*) FROM subjects WHERE creator_id = ?";
         try {
