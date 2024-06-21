@@ -18,12 +18,14 @@
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/ChangeSliderServlet.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/model/Slider.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/EditSliderServlet.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/blogManager.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/model/Lesson.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/NewPracticeController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/SubjectServlet.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/newSubject.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/LoginController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/layout/searchSubjectList.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/layout/sidebar.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dto/DimensionDTO.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/SubjectManagerController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/RegisterController.java</file>
@@ -32,6 +34,7 @@
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/MyRegisterServlet.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/SliderDAO.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/Subject2DAO.java</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/css/style.css</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/BlogDAO.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/util/mail/Mail.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/LessonDAO.java</file>
@@ -51,8 +54,10 @@
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/lessonManager.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/js/script.js</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/playlist.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/subjectManager.jsp</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/controller/HomeController.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/subjectDetailExpert.jsp</file>
+            <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/css/myRegister.css</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/src/java/dal/UserDAO.java</file>
             <file>file:/D:/CodeThue/Ki_8/SWP_Quiz/3_6/QuizPractice%20(1)/QuizPractice/QuizPractice/web/sliderManager.jsp</file>
         </group>

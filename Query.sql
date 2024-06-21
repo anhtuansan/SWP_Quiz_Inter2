@@ -36,6 +36,7 @@ select * from Subject_Register;
 select * from users;
 select * from roles;
 
+
 select r.id,s.name, r.CreatedAt, p.name, p.original_price, r.Status 
 from Subject_Register r 
 left join subjects s on r.SubjectId = s.id
@@ -445,3 +446,135 @@ update lessons set status = 1 where id = 1;
 
 --dieukien
 select creator_id from subjects where id = 2;
+
+
+
+
+
+
+
+
+
+select * from roles
+
+
+
+
+
+------------------23
+WITH PagedResults AS (
+    SELECT 
+        s.id, 
+        s.name, 
+        d.DimensionName, 
+        COUNT(sl.lesson_id) as NumberLesson,
+        s.status,
+        ROW_NUMBER() OVER (ORDER BY s.creater_at) AS row_num
+    FROM 
+        subjects s 
+    LEFT JOIN 
+        Dimension d ON s.dimensionId = d.DimensionId
+    LEFT JOIN 
+        subject_has_lesson sl ON sl.subject_id = s.id
+    WHERE 
+        s.creator_id = 1028
+    GROUP BY 
+        s.id, 
+        s.name, 
+        d.DimensionName, 
+        s.status, 
+        s.creater_at
+)
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+
+WITH PagedResults AS (
+    SELECT 
+        s.id, 
+        s.name, 
+        d.DimensionName, 
+        COUNT(sl.lesson_id) as NumberLesson,
+        s.status,
+        ROW_NUMBER() OVER (ORDER BY s.creater_at) AS row_num
+    FROM 
+        subjects s 
+    LEFT JOIN 
+        Dimension d ON s.dimensionId = d.DimensionId
+    LEFT JOIN 
+        subject_has_lesson sl ON sl.subject_id = s.id
+    WHERE 
+        s.creator_id = 1028 and s.name like '%pro%'
+    GROUP BY 
+        s.id, 
+        s.name, 
+        d.DimensionName, 
+        s.status, 
+        s.creater_at
+)
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+
+WITH PagedResults AS (
+    SELECT 
+        s.id, 
+        s.name, 
+        d.DimensionName, 
+        COUNT(sl.lesson_id) as NumberLesson,
+        s.status,
+        ROW_NUMBER() OVER (ORDER BY s.creater_at) AS row_num
+    FROM 
+        subjects s 
+    LEFT JOIN 
+        Dimension d ON s.dimensionId = d.DimensionId
+    LEFT JOIN 
+        subject_has_lesson sl ON sl.subject_id = s.id
+    WHERE 
+        s.creator_id = 1028 and s.dimensionId = 2
+    GROUP BY 
+        s.id, 
+        s.name, 
+        d.DimensionName, 
+        s.status, 
+        s.creater_at
+)
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+
+WITH PagedResults AS (
+    SELECT 
+        s.id, 
+        s.name, 
+        d.DimensionName, 
+        COUNT(sl.lesson_id) as NumberLesson,
+        s.status,
+        ROW_NUMBER() OVER (ORDER BY s.creater_at) AS row_num
+    FROM 
+        subjects s 
+    LEFT JOIN 
+        Dimension d ON s.dimensionId = d.DimensionId
+    LEFT JOIN 
+        subject_has_lesson sl ON sl.subject_id = s.id
+    WHERE 
+        s.creator_id = 1028 and s.status = 1
+    GROUP BY 
+        s.id, 
+        s.name, 
+        d.DimensionName, 
+        s.status, 
+        s.creater_at
+)
+SELECT * 
+FROM PagedResults
+WHERE row_num BETWEEN 1 AND 5
+ORDER BY row_num;
+
+select * from subjects;
